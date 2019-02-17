@@ -23,6 +23,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet weak var newsLabel: UILabel!
+    
+    var isDangerous = false
+    
     @IBAction func clockButtonClicked(_ sender: UIButton) {
         sendHelpSMS()
         let alertController = UIAlertController(
@@ -209,7 +213,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
             success: {_ in
                 print("Sent a HELP SMS.")
                 DispatchQueue.main.async {
-                    self.view.makeToast("Sent an OK SMS")
+                    self.view.makeToast("Sent a HELP SMS")
                 }
         })
     }
@@ -223,19 +227,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
                                finished: {
                     print("Update security score view...")
                                 
-                                if self.securityScore!.score < 0.6 {
-                                    DispatchQueue.main.async {
-                                        self.showQuestion()
+                                if self.securityScore!.score > 0.6 {
+                                    if !self.isDangerous {
+                                        DispatchQueue.main.async {
+                                            self.showQuestion()
+                                        }
+                                        self.isDangerous = true
                                     }
 //                                            Timer.scheduledTimer(timeInterval: 30, target: self,
 //                                                selector: #selector(ViewController.alert), userInfo: nil,
 //                                                                 repeats: false)
+                                } else {
+                                    self.isDangerous = false
                                 }
                                 
                             DispatchQueue.main.async {
                                 self.updateMap()
                                 
-                                if self.securityScore!.score < 0.3 {
+                                if self.securityScore!.score > 0.6 {
                                     self.securityScoreLabel.text = "Security score: " + String(self.securityScore!.score) + " 😨"
                                 } else {
                                     self.securityScoreLabel.text = "Security score: " + String(self.securityScore!.score) + " 😄"
