@@ -12,20 +12,42 @@ import WebKit
 import GoogleMaps
 import GooglePlaces
 import Toast_Swift
+import UserNotifications
 
 // https://stackoverflow.com/questions/47300435/update-location-in-background
 // https://www.raywenderlich.com/5817-background-modes-tutorial-getting-started
 
-class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate, UNUserNotificationCenterDelegate {
     let locationManager = CLLocationManager()
         // https://developer.apple.com/documentation/webkit/wkwebview
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBAction func clockButtonClicked(_ sender: UIButton) {
+        sendHelpSMS()
+        let alertController = UIAlertController(
+            title: "HELP message has been sent",
+            message: "10 minutes have been passed after you entered the statistically dangerous zone.",
+            preferredStyle: UIAlertController.Style.alert
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: "Dismiss",
+            style: UIAlertAction.Style.default) { (action) in
+        }
+        
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     
     @IBAction func okButtonClicked(_ sender: UIButton) {
-        
+        sendOKSMS()
+    }
+    
+    private func sendOKSMS() {
         let address: String
         if self.securityScore != nil {
             address = self.securityScore!.address
@@ -34,22 +56,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
         }
         WebClient.getWithParam(
             urlString: "https://treehacks-mappal.appspot.com/send_okay_sms",
-                        param: "address",
-                        paramValue: address,
-                        noData: {
-                            print("nodata")
+            param: "address",
+            paramValue: address,
+            noData: {
+                print("nodata")
         },
-                        not200: {_ in
-                            print("not200")
+            not200: {_ in
+                print("not200")
         },
-                        failure: {_ in
-                            print("failure")
+            failure: {_ in
+                print("failure")
         },
-                        success: {_ in
-                            print("Sent an OK SMS.")
-                            DispatchQueue.main.async {
-                                self.view.makeToast("Sent an OK SMS")
-                            }
+            success: {_ in
+                print("Sent an OK SMS.")
+                DispatchQueue.main.async {
+                    self.view.makeToast("Sent an OK SMS")
+                }
         })
     }
     
@@ -74,8 +96,63 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
 
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Yay!")
+            } else {
+                print("D'oh")
+            }
+        }
+
+//        let content = UNMutableNotificationContent()
+//
+//        content.title = NSString.localizedUserNotificationString(forKey: "Notification", arguments: nil)
+//        content.body = NSString.localizedUserNotificationString(forKey: "message", arguments: nil)
+//        content.sound = UNNotificationSound.default
+//
+//        // アプリを起動して5秒後に通知を送る
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+//
+//        let request = UNNotificationRequest(identifier: "my-notification", content: content, trigger: trigger)
+        
+//        center.add(request) { (error : Error?) in
+//            if let theError = error {
+//                // Handle any errors
+//                print(theError.localizedDescription)
+//                return
+//            }
+//        }
     }
+    
+
+    private func showQuestion() {
+            let alertController = UIAlertController(
+                title: "Are You OK?",
+                message: "You entered a statistically dangerous zone.",
+                preferredStyle: UIAlertController.Style.alert
+            )
+            
+            let cancelAction = UIAlertAction(
+                title: "Help me",
+                style: UIAlertAction.Style.destructive) { (action) in
+                    self.sendHelpSMS()
+            }
+            
+            let confirmAction = UIAlertAction(
+            title: "OK", style: UIAlertAction.Style.default) { (action) in
+                self.sendOKSMS()
+            }
+            
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+    }
+
     
     private func updateMap() {
         let lat: Double
@@ -146,10 +223,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
                                finished: {
                     print("Update security score view...")
                                 
-                                if self.securityScore!.score < 0.3 {
-                                            Timer.scheduledTimer(timeInterval: 30, target: self,
-                                                selector: #selector(ViewController.alert), userInfo: nil,
-                                                                 repeats: false)
+                                if self.securityScore!.score < 0.6 {
+                                    DispatchQueue.main.async {
+                                        self.showQuestion()
+                                    }
+//                                            Timer.scheduledTimer(timeInterval: 30, target: self,
+//                                                selector: #selector(ViewController.alert), userInfo: nil,
+//                                                                 repeats: false)
                                 }
                                 
                             DispatchQueue.main.async {
@@ -160,7 +240,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
                                 } else {
                                     self.securityScoreLabel.text = "Security score: " + String(self.securityScore!.score) + " 😄"
                                 }
-                                self.addressLabel.text = "Address: " + String(self.securityScore!.address)
+                                self.addressLabel.text = String(self.securityScore!.address)
             }
             }, failed: {
                 print("Failed to update security score")
