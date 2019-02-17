@@ -10,4 +10,5 @@ import Foundation
 
 class SecurityScore: Codable {
     let score: Double
+    let address: String
 }

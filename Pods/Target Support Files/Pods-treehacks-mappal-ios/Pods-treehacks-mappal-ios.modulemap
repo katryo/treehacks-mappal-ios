@@ -1,0 +1,6 @@
+framework module Pods_treehacks_mappal_ios {
+  umbrella header "Pods-treehacks-mappal-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}

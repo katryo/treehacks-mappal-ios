@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E3D47AB8C93C2A1E4A893AD /* Pods_treehacks_mappal_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9810943244C9B8FAFFCF5DBB /* Pods_treehacks_mappal_ios.framework */; };
 		5380088122189FEA00CF0ADB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380088022189FEA00CF0ADB /* AppDelegate.swift */; };
 		5380088322189FEA00CF0ADB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380088222189FEA00CF0ADB /* ViewController.swift */; };
 		5380088622189FEA00CF0ADB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5380088422189FEA00CF0ADB /* Main.storyboard */; };
@@ -26,6 +27,9 @@
 		5380088C22189FEC00CF0ADB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		538008922219114E00CF0ADB /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		5380089422191F4D00CF0ADB /* SecurityScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityScore.swift; sourceTree = "<group>"; };
+		71D981B9590477B142632003 /* Pods-treehacks-mappal-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-treehacks-mappal-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios.release.xcconfig"; sourceTree = "<group>"; };
+		9810943244C9B8FAFFCF5DBB /* Pods_treehacks_mappal_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_treehacks_mappal_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B47F1FA10B0DD9A43F7F4B16 /* Pods-treehacks-mappal-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-treehacks-mappal-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3D47AB8C93C2A1E4A893AD /* Pods_treehacks_mappal_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +49,8 @@
 			children = (
 				5380087F22189FEA00CF0ADB /* treehacks-mappal-ios */,
 				5380087E22189FEA00CF0ADB /* Products */,
+				92D1AF7EE085C7FA95731DBF /* Pods */,
+				76AB66587F5E5985E85CB650 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +77,23 @@
 			path = "treehacks-mappal-ios";
 			sourceTree = "<group>";
 		};
+		76AB66587F5E5985E85CB650 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9810943244C9B8FAFFCF5DBB /* Pods_treehacks_mappal_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92D1AF7EE085C7FA95731DBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B47F1FA10B0DD9A43F7F4B16 /* Pods-treehacks-mappal-ios.debug.xcconfig */,
+				71D981B9590477B142632003 /* Pods-treehacks-mappal-ios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5380088F22189FEC00CF0ADB /* Build configuration list for PBXNativeTarget "treehacks-mappal-ios" */;
 			buildPhases = (
+				94C60324FA47A8AD95F7987E /* [CP] Check Pods Manifest.lock */,
 				5380087922189FEA00CF0ADB /* Sources */,
 				5380087A22189FEA00CF0ADB /* Frameworks */,
 				5380087B22189FEA00CF0ADB /* Resources */,
+				852488C9E7C6539CA957FCEC /* [CP] Copy Pods Resources */,
+				3EA604A144FAD315E664645F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -140,6 +167,77 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3EA604A144FAD315E664645F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		852488C9E7C6539CA957FCEC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94C60324FA47A8AD95F7987E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-treehacks-mappal-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5380087922189FEA00CF0ADB /* Sources */ = {
@@ -293,6 +391,7 @@
 		};
 		5380089022189FEC00CF0ADB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B47F1FA10B0DD9A43F7F4B16 /* Pods-treehacks-mappal-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -311,6 +410,7 @@
 		};
 		5380089122189FEC00CF0ADB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71D981B9590477B142632003 /* Pods-treehacks-mappal-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

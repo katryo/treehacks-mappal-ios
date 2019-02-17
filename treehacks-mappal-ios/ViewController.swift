@@ -9,6 +9,9 @@
 import UIKit
 import CoreLocation
 import WebKit
+import GoogleMaps
+import GooglePlaces
+import Toast_Swift
 
 // https://stackoverflow.com/questions/47300435/update-location-in-background
 // https://www.raywenderlich.com/5817-background-modes-tutorial-getting-started
@@ -16,15 +19,23 @@ import WebKit
 class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate {
     let locationManager = CLLocationManager()
         // https://developer.apple.com/documentation/webkit/wkwebview
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var addressLabel: UILabel!
     
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     
     @IBAction func okButtonClicked(_ sender: UIButton) {
-        print("OK!")
+        
+        let address: String
+        if self.securityScore != nil {
+            address = self.securityScore!.address
+        } else {
+            address = "not sure"
+        }
         WebClient.getWithParam(
             urlString: "https://treehacks-mappal.appspot.com/send_okay_sms",
                         param: "address",
-                        paramValue: "somewhere",
+                        paramValue: address,
                         noData: {
                             print("nodata")
         },
@@ -35,27 +46,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
                             print("failure")
         },
                         success: {_ in
-                            print("Sent SMS okay.")
+                            print("Sent an OK SMS.")
+                            DispatchQueue.main.async {
+                                self.view.makeToast("Sent an OK SMS")
+                            }
         })
     }
     
     @IBAction func helpMeButtonClicked(_ sender: UIButton) {
-        WebClient.getWithParam(
-            urlString: "https://treehacks-mappal.appspot.com/send_help_sms",
-            param: "address",
-            paramValue: "somewhere",
-            noData: {
-                print("nodata")
-        },
-            not200: {_ in
-                print("not200")
-        },
-            failure: {_ in
-                print("failure")
-        },
-            success: {_ in
-                print("Sent SMS okay.")
-        })
+        sendHelpSMS()
         print("Sent SMS to the parent")
     }
     
@@ -67,11 +66,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
         super.viewDidLoad()
         
 
+        updateMap()
+        self.mapView.isMyLocationEnabled = true
+        self.mapView.mapType = .normal
+        
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
 
+    }
+    
+    private func updateMap() {
+        let lat: Double
+        let lng: Double
+        if locationManager.location != nil {
+            lat = locationManager.location!.coordinate.latitude
+            lng = locationManager.location!.coordinate.longitude
+        } else {
+            lat = 34.052235
+            lng = -118.243683
+        }
+        let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 10)
+        self.mapView.camera = camera
+
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: 34.052235, longitude: -118.243683)
+        marker.map = self.mapView
     }
     
     
@@ -84,7 +105,36 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
 //    }
     
     @objc func alert() {
+        sendHelpSMS()
         print("send an SMS message to the parent")
+    }
+    
+    private func sendHelpSMS() {
+        let address: String
+        if self.securityScore != nil {
+            address = self.securityScore!.address
+        } else {
+            address = "not sure"
+        }
+        WebClient.getWithParam(
+            urlString: "https://treehacks-mappal.appspot.com/send_help_sms",
+            param: "address",
+            paramValue: address,
+            noData: {
+                print("nodata")
+        },
+            not200: {_ in
+                print("not200")
+        },
+            failure: {_ in
+                print("failure")
+        },
+            success: {_ in
+                print("Sent a HELP SMS.")
+                DispatchQueue.main.async {
+                    self.view.makeToast("Sent an OK SMS")
+                }
+        })
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -93,18 +143,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
             // TODO: address
             fetchSecurityScore(lat: location.coordinate.latitude,
                                lng: location.coordinate.longitude,
-                               address: "1234 Stanford, CA, 10000",
                                finished: {
                     print("Update security score view...")
                                 
                                 if self.securityScore!.score < 0.3 {
-                                            Timer.scheduledTimer(timeInterval: 1000, target: self,
+                                            Timer.scheduledTimer(timeInterval: 30, target: self,
                                                 selector: #selector(ViewController.alert), userInfo: nil,
                                                                  repeats: false)
                                 }
                                 
                             DispatchQueue.main.async {
-                                self.securityScoreLabel.text = "Security score:" + String(self.securityScore!.score)
+                                self.updateMap()
+                                
+                                if self.securityScore!.score < 0.3 {
+                                    self.securityScoreLabel.text = "Security score: " + String(self.securityScore!.score) + " 😨"
+                                } else {
+                                    self.securityScoreLabel.text = "Security score: " + String(self.securityScore!.score) + " 😄"
+                                }
+                                self.addressLabel.text = "Address: " + String(self.securityScore!.address)
             }
             }, failed: {
                 print("Failed to update security score")
@@ -153,13 +209,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate 
     
     private func fetchSecurityScore(lat: Double,
                                     lng: Double,
-                                    address: String,
          finished: @escaping () -> Void,
          failed: @escaping () -> Void) {
         WebClient.fetch(urlString: "https://treehacks-mappal.appspot.com/security_score",
                         lat: lat,
                         lng: lng,
-                        address: address,
                         noData: {
                             print("nodata")
                             failed()

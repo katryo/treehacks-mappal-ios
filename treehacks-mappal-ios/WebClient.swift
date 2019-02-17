@@ -51,7 +51,6 @@ class WebClient {
     static func fetch(urlString: String,
                       lat: Double,
                       lng: Double,
-                      address: String,
                       noData: @escaping () -> Void = {},
                       not200: @escaping (HTTPURLResponse) -> Void = {_ in },
                       failure: @escaping (Error)-> Void = {_ in},
@@ -60,8 +59,7 @@ class WebClient {
         var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
         
         components.queryItems = [URLQueryItem(name: "lat", value: String(lat)),
-                                 URLQueryItem(name: "lng", value: String(lng)),
-                                 URLQueryItem(name: "address", value: address)]
+                                 URLQueryItem(name: "lng", value: String(lng))]
         let url = components.url!
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             print(url)
