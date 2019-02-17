@@ -12,6 +12,8 @@
 		5380088622189FEA00CF0ADB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5380088422189FEA00CF0ADB /* Main.storyboard */; };
 		5380088822189FEC00CF0ADB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5380088722189FEC00CF0ADB /* Assets.xcassets */; };
 		5380088B22189FEC00CF0ADB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5380088922189FEC00CF0ADB /* LaunchScreen.storyboard */; };
+		538008932219114E00CF0ADB /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538008922219114E00CF0ADB /* WebClient.swift */; };
+		5380089522191F4D00CF0ADB /* SecurityScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380089422191F4D00CF0ADB /* SecurityScore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		5380088722189FEC00CF0ADB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5380088A22189FEC00CF0ADB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5380088C22189FEC00CF0ADB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		538008922219114E00CF0ADB /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
+		5380089422191F4D00CF0ADB /* SecurityScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityScore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				5380088022189FEA00CF0ADB /* AppDelegate.swift */,
 				5380088222189FEA00CF0ADB /* ViewController.swift */,
+				5380089422191F4D00CF0ADB /* SecurityScore.swift */,
+				538008922219114E00CF0ADB /* WebClient.swift */,
 				5380088422189FEA00CF0ADB /* Main.storyboard */,
 				5380088722189FEC00CF0ADB /* Assets.xcassets */,
 				5380088922189FEC00CF0ADB /* LaunchScreen.storyboard */,
@@ -96,6 +102,11 @@
 				TargetAttributes = {
 					5380087C22189FEA00CF0ADB = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -137,6 +148,8 @@
 			files = (
 				5380088322189FEA00CF0ADB /* ViewController.swift in Sources */,
 				5380088122189FEA00CF0ADB /* AppDelegate.swift in Sources */,
+				5380089522191F4D00CF0ADB /* SecurityScore.swift in Sources */,
+				538008932219114E00CF0ADB /* WebClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
