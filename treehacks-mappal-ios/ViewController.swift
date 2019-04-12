@@ -28,6 +28,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
     var isDangerous = false
     
     @IBAction func clockButtonClicked(_ sender: UIButton) {
+        fun()
+    }
+    
+    @objc
+    private func fun() {
         sendHelpSMS()
         let alertController = UIAlertController(
             title: "HELP message has been sent",
@@ -101,6 +106,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
+        Timer.scheduledTimer(timeInterval: 60, target: self,
+                                                        selector: #selector(ViewController.fun), userInfo: nil,
+                                                                         repeats: true)
         let center = UNUserNotificationCenter.current()
         center.delegate = self
 
@@ -111,29 +119,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
                 print("D'oh")
             }
         }
-
-//        let content = UNMutableNotificationContent()
-//
-//        content.title = NSString.localizedUserNotificationString(forKey: "Notification", arguments: nil)
-//        content.body = NSString.localizedUserNotificationString(forKey: "message", arguments: nil)
-//        content.sound = UNNotificationSound.default
-//
-//        // アプリを起動して5秒後に通知を送る
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
-//
-//        let request = UNNotificationRequest(identifier: "my-notification", content: content, trigger: trigger)
-        
-//        center.add(request) { (error : Error?) in
-//            if let theError = error {
-//                // Handle any errors
-//                print(theError.localizedDescription)
-//                return
-//            }
-//        }
     }
     
 
-    private func showQuestion() {
+    @objc private func showQuestion() {
             let alertController = UIAlertController(
                 title: "Are You OK?",
                 message: "You entered a statistically dangerous zone.",
@@ -213,15 +202,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
             success: {_ in
                 print("Sent a HELP SMS.")
                 DispatchQueue.main.async {
-                    self.view.makeToast("Sent a HELP SMS")
+                    self.view.makeToast("Sent an OK SMS")
                 }
         })
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
-            print("latitude:\(location.coordinate.latitude) longitude:\(location.coordinate.longitude) time:\(location.timestamp.description)")
-            // TODO: address
+
             fetchSecurityScore(lat: location.coordinate.latitude,
                                lng: location.coordinate.longitude,
                                finished: {
@@ -234,9 +222,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
                                         }
                                         self.isDangerous = true
                                     }
-//                                            Timer.scheduledTimer(timeInterval: 30, target: self,
-//                                                selector: #selector(ViewController.alert), userInfo: nil,
-//                                                                 repeats: false)
+
                                 } else {
                                     self.isDangerous = false
                                 }
@@ -250,7 +236,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
                                     self.securityScoreLabel.text = "Security score: " + String(self.securityScore!.score) + " 😄"
                                 }
                                 self.addressLabel.text = String(self.securityScore!.address)
-            }
+                            }
             }, failed: {
                 print("Failed to update security score")
             })
@@ -281,19 +267,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WKUIDelegate,
             break
         }
     }
-    
-//    func registerBackgroundTask() {
-//        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
-//            self?.endBackgroundTask()
-//        }
-//        assert(backgroundTask != .invalid)
-//    }
-//
-//    func endBackgroundTask() {
-//        print("Background task ended.")
-//        UIApplication.shared.endBackgroundTask(backgroundTask)
-//        backgroundTask = .invalid
-//    }
     
     
     private func fetchSecurityScore(lat: Double,

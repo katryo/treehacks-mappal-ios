@@ -15,7 +15,18 @@
 		5380088B22189FEC00CF0ADB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5380088922189FEC00CF0ADB /* LaunchScreen.storyboard */; };
 		538008932219114E00CF0ADB /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538008922219114E00CF0ADB /* WebClient.swift */; };
 		5380089522191F4D00CF0ADB /* SecurityScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380089422191F4D00CF0ADB /* SecurityScore.swift */; };
+		53805CEB224D9F9100206D40 /* treehacks_mappal_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53805CEA224D9F9100206D40 /* treehacks_mappal_iosUITests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		53805CED224D9F9100206D40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5380087522189FEA00CF0ADB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5380087C22189FEA00CF0ADB;
+			remoteInfo = "treehacks-mappal-ios";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5380087D22189FEA00CF0ADB /* treehacks-mappal-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "treehacks-mappal-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,6 +38,9 @@
 		5380088C22189FEC00CF0ADB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		538008922219114E00CF0ADB /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		5380089422191F4D00CF0ADB /* SecurityScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityScore.swift; sourceTree = "<group>"; };
+		53805CE8224D9F9100206D40 /* treehacks-mappal-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "treehacks-mappal-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53805CEA224D9F9100206D40 /* treehacks_mappal_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = treehacks_mappal_iosUITests.swift; sourceTree = "<group>"; };
+		53805CEC224D9F9100206D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71D981B9590477B142632003 /* Pods-treehacks-mappal-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-treehacks-mappal-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios.release.xcconfig"; sourceTree = "<group>"; };
 		9810943244C9B8FAFFCF5DBB /* Pods_treehacks_mappal_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_treehacks_mappal_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47F1FA10B0DD9A43F7F4B16 /* Pods-treehacks-mappal-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-treehacks-mappal-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-treehacks-mappal-ios/Pods-treehacks-mappal-ios.debug.xcconfig"; sourceTree = "<group>"; };
@@ -41,6 +55,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		53805CE5224D9F9100206D40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -48,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				5380087F22189FEA00CF0ADB /* treehacks-mappal-ios */,
+				53805CE9224D9F9100206D40 /* treehacks-mappal-iosUITests */,
 				5380087E22189FEA00CF0ADB /* Products */,
 				92D1AF7EE085C7FA95731DBF /* Pods */,
 				76AB66587F5E5985E85CB650 /* Frameworks */,
@@ -58,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				5380087D22189FEA00CF0ADB /* treehacks-mappal-ios.app */,
+				53805CE8224D9F9100206D40 /* treehacks-mappal-iosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +98,15 @@
 				5380088C22189FEC00CF0ADB /* Info.plist */,
 			);
 			path = "treehacks-mappal-ios";
+			sourceTree = "<group>";
+		};
+		53805CE9224D9F9100206D40 /* treehacks-mappal-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				53805CEA224D9F9100206D40 /* treehacks_mappal_iosUITests.swift */,
+				53805CEC224D9F9100206D40 /* Info.plist */,
+			);
+			path = "treehacks-mappal-iosUITests";
 			sourceTree = "<group>";
 		};
 		76AB66587F5E5985E85CB650 /* Frameworks */ = {
@@ -117,13 +149,31 @@
 			productReference = 5380087D22189FEA00CF0ADB /* treehacks-mappal-ios.app */;
 			productType = "com.apple.product-type.application";
 		};
+		53805CE7224D9F9100206D40 /* treehacks-mappal-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53805CEF224D9F9100206D40 /* Build configuration list for PBXNativeTarget "treehacks-mappal-iosUITests" */;
+			buildPhases = (
+				53805CE4224D9F9100206D40 /* Sources */,
+				53805CE5224D9F9100206D40 /* Frameworks */,
+				53805CE6224D9F9100206D40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				53805CEE224D9F9100206D40 /* PBXTargetDependency */,
+			);
+			name = "treehacks-mappal-iosUITests";
+			productName = "treehacks-mappal-iosUITests";
+			productReference = 53805CE8224D9F9100206D40 /* treehacks-mappal-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		5380087522189FEA00CF0ADB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = mappal;
 				TargetAttributes = {
@@ -134,6 +184,10 @@
 								enabled = 1;
 							};
 						};
+					};
+					53805CE7224D9F9100206D40 = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = 5380087C22189FEA00CF0ADB;
 					};
 				};
 			};
@@ -151,6 +205,7 @@
 			projectRoot = "";
 			targets = (
 				5380087C22189FEA00CF0ADB /* treehacks-mappal-ios */,
+				53805CE7224D9F9100206D40 /* treehacks-mappal-iosUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -163,6 +218,13 @@
 				5380088B22189FEC00CF0ADB /* LaunchScreen.storyboard in Resources */,
 				5380088822189FEC00CF0ADB /* Assets.xcassets in Resources */,
 				5380088622189FEA00CF0ADB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53805CE6224D9F9100206D40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +313,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		53805CE4224D9F9100206D40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53805CEB224D9F9100206D40 /* treehacks_mappal_iosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		53805CEE224D9F9100206D40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5380087C22189FEA00CF0ADB /* treehacks-mappal-ios */;
+			targetProxy = 53805CED224D9F9100206D40 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5380088422189FEA00CF0ADB /* Main.storyboard */ = {
@@ -427,6 +505,46 @@
 			};
 			name = Release;
 		};
+		53805CF0224D9F9100206D40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MF3Q5NN553;
+				INFOPLIST_FILE = "treehacks-mappal-iosUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.katryo.treehacks-mappal-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "treehacks-mappal-ios";
+			};
+			name = Debug;
+		};
+		53805CF1224D9F9100206D40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MF3Q5NN553;
+				INFOPLIST_FILE = "treehacks-mappal-iosUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.katryo.treehacks-mappal-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "treehacks-mappal-ios";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -444,6 +562,15 @@
 			buildConfigurations = (
 				5380089022189FEC00CF0ADB /* Debug */,
 				5380089122189FEC00CF0ADB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53805CEF224D9F9100206D40 /* Build configuration list for PBXNativeTarget "treehacks-mappal-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53805CF0224D9F9100206D40 /* Debug */,
+				53805CF1224D9F9100206D40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
